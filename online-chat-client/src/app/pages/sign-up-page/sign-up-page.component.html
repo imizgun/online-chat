@@ -1,0 +1,19 @@
+<div class="sign-up">
+  <div class="content">
+    <div class="title">
+      Sign Up
+    </div>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit($event)" class="form">
+      <input formControlName="email" placeholder="Email" />
+      <div class="error">{{getErrorByKey("email")}}</div>
+      <input formControlName="name" placeholder="Name" />
+      <div class="error">{{getErrorByKey("name")}}</div>
+      <input formControlName="password" placeholder="Password" type="password"/>
+      <div class="error">{{getErrorByKey("password")}}</div>
+      <input formControlName="repeatPassword" placeholder="Repeat password" type="password"/>
+      <div class="error">{{getErrorByKey("repeatPassword")}}</div>
+      <button type="submit">Sign up for chatting</button>
+    </form>
+    <p>Already have an account? Go to <a [replaceUrl]="true" [routerLink]="['/log_in']">Sign up</a></p>
+  </div>
+</div>

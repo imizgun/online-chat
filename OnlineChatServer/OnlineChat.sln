@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineChat", "OnlineChat\OnlineChat.csproj", "{6B2A7072-842D-41AE-BE8F-1582566FD957}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineChat.DatabaseAccess", "OnlineChat.DatabaseAccess\OnlineChat.DatabaseAccess.csproj", "{6478007E-F678-4A2E-A002-5B6D371DDC3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B2A7072-842D-41AE-BE8F-1582566FD957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B2A7072-842D-41AE-BE8F-1582566FD957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B2A7072-842D-41AE-BE8F-1582566FD957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B2A7072-842D-41AE-BE8F-1582566FD957}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6478007E-F678-4A2E-A002-5B6D371DDC3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6478007E-F678-4A2E-A002-5B6D371DDC3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6478007E-F678-4A2E-A002-5B6D371DDC3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6478007E-F678-4A2E-A002-5B6D371DDC3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

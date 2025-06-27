@@ -1,0 +1,14 @@
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\bin\Debug\net8.0\OnlineChat.DatabaseAccess.deps.json
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\bin\Debug\net8.0\OnlineChat.DatabaseAccess.dll
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\bin\Debug\net8.0\OnlineChat.DatabaseAccess.pdb
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\OnlineChat.DatabaseAccess.csproj.AssemblyReference.cache
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\OnlineChat.DatabaseAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\OnlineChat.DatabaseAccess.AssemblyInfoInputs.cache
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\OnlineChat.DatabaseAccess.AssemblyInfo.cs
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\OnlineChat.DatabaseAccess.csproj.CoreCompileInputs.cache
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\OnlineChat.DatabaseAccess.dll
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\refint\OnlineChat.DatabaseAccess.dll
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\OnlineChat.DatabaseAccess.pdb
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\ref\OnlineChat.DatabaseAccess.dll
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\bin\Debug\net8.0\OnlineChat.DatabaseAccess.runtimeconfig.json
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChat.DatabaseAccess\obj\Debug\net8.0\OnlineChat.DatabaseAccess.genruntimeconfig.cache

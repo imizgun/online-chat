@@ -1,0 +1,31 @@
+import { Routes } from '@angular/router';
+import {SignUpPageComponent} from './pages/sign-up-page/sign-up-page.component';
+import {LayoutComponent} from './pages/layout/layout.component';
+import {LogInComponent} from './pages/log-in/log-in.component';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {ChatEnterComponent} from './pages/chat-enter/chat-enter.component';
+
+export const routes: Routes = [
+  {
+    path: "",
+    component: LayoutComponent,
+    children: [
+      {
+        path: "sign_up",
+        component: SignUpPageComponent
+      },
+      {
+        path: "log_in",
+        component: LogInComponent
+      },
+      {
+        path: "chat_enter",
+        component: ChatEnterComponent
+      }
+    ]
+  },
+  {
+    path: "**",
+    component: NotFoundComponent
+  }
+];
