@@ -80,7 +80,7 @@ namespace OnlineChat.DatabaseAccess.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Message");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("OnlineChat.DatabaseAccess.Entities.User", b =>

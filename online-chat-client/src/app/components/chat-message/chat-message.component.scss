@@ -1,0 +1,16 @@
+.message {
+  max-width: 50%;
+  display: flex;
+  margin: 10px 10px;
+  flex-direction: column;
+
+  .author {
+    margin-left: 10px;
+  }
+
+  .content {
+    background-color: #e6e8e8;
+    padding: 0 10px;
+    overflow-wrap: break-word;
+  }
+}

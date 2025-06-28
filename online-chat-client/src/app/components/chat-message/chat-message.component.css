@@ -1,0 +1,13 @@
+.message {
+  max-width: 50%;
+  display: flex;
+  margin: 10px 10px;
+  flex-direction: column; }
+  .message .author {
+    margin-left: 10px; }
+  .message .content {
+    background-color: #e6e8e8;
+    padding: 0 10px;
+    overflow-wrap: break-word; }
+
+/*# sourceMappingURL=chat-message.component.css.map */

@@ -1,0 +1,16 @@
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\bin\Debug\net8.0\OnlineChat.Application.deps.json
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\bin\Debug\net8.0\OnlineChat.Application.dll
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\bin\Debug\net8.0\OnlineChat.Application.pdb
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\bin\Debug\net8.0\OnlineChat.DatabaseAccess.dll
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\bin\Debug\net8.0\OnlineChat.DatabaseAccess.pdb
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\OnlineChat.Application.csproj.AssemblyReference.cache
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\OnlineChat.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\OnlineChat.Application.AssemblyInfoInputs.cache
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\OnlineChat.Application.AssemblyInfo.cs
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\OnlineChat.Application.csproj.CoreCompileInputs.cache
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\OnlineChat.Application.sourcelink.json
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\OnlineCh.460CA2F3.Up2Date
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\OnlineChat.Application.dll
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\refint\OnlineChat.Application.dll
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\OnlineChat.Application.pdb
+C:\Users\miham\Desktop\Prog\OnlineChat\OnlineChatServer\OnlineChat.Application\obj\Debug\net8.0\ref\OnlineChat.Application.dll

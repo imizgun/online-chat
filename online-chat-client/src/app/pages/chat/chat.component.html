@@ -1,0 +1,19 @@
+<div class="chat">
+  <div class="content">
+    <div class="chat-title">
+      Chat
+    </div>
+    <div class="chat-content">
+      @for (message of messages; track message.id) {
+        <app-chat-message
+          [content]="message.content"
+          [author]="message.authorName"
+        />
+      }
+    </div>
+    <form class="send-message">
+      <input placeholder="Write your message"/>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</div>

@@ -14,6 +14,9 @@
       <div class="error">{{getErrorByKey("repeatPassword")}}</div>
       <button type="submit">Sign up for chatting</button>
     </form>
+    <div *ngIf="isResponse" [ngStyle]="{'color': responseObj.isError ? 'red': 'green'}">
+      {{responseObj.responseText}}
+    </div>
     <p>Already have an account? Go to <a [replaceUrl]="true" [routerLink]="['/log_in']">Sign up</a></p>
   </div>
 </div>

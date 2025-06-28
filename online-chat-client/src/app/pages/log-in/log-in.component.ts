@@ -1,13 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {IdentityService} from '../../services/identity-service/identity.service';
+import {NgIf, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-log-in',
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    NgIf,
+    NgStyle
   ],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss'
@@ -19,6 +23,8 @@ export class LogInComponent  {
     }
   );
 
+  constructor(private identity: IdentityService, private navigator: Router) { }
+
   getErrorByKey(key: string): string {
     if (this.loginForm.controls[key].errors === null || Object.keys(this.loginForm.controls[key].errors ?? {}).length === 0) {
       return "";
@@ -29,11 +35,33 @@ export class LogInComponent  {
     }
   }
 
+  responseObj = {
+    responseText: "",
+    isError: false,
+  };
+  isResponse = false;
+
   onSubmit(event: SubmitEvent) {
     event.preventDefault();
 
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
+
+      this.identity.logInUser({
+        email: this.loginForm.get('email')?.value ?? "",
+        password: this.loginForm.get('password')?.value ?? ""
+
+      }).subscribe({
+        next: r => {
+          sessionStorage.setItem('user', JSON.stringify(r));
+          this.navigator.navigateByUrl("/chat_enter");
+        },
+        error: e => {
+          this.responseObj.responseText = "Incorrect email or password";
+          this.responseObj.isError = true;
+          this.isResponse = true;
+        }
+      });
     }
   }
 

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineChat", "OnlineChat\On
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineChat.DatabaseAccess", "OnlineChat.DatabaseAccess\OnlineChat.DatabaseAccess.csproj", "{6478007E-F678-4A2E-A002-5B6D371DDC3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineChat.Application", "OnlineChat.Application\OnlineChat.Application.csproj", "{DF293BC2-9ECA-40B8-A9AC-4E65E89B7A13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{6478007E-F678-4A2E-A002-5B6D371DDC3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6478007E-F678-4A2E-A002-5B6D371DDC3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6478007E-F678-4A2E-A002-5B6D371DDC3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF293BC2-9ECA-40B8-A9AC-4E65E89B7A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF293BC2-9ECA-40B8-A9AC-4E65E89B7A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF293BC2-9ECA-40B8-A9AC-4E65E89B7A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF293BC2-9ECA-40B8-A9AC-4E65E89B7A13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

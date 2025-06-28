@@ -6,9 +6,10 @@
     <form [formGroup]="chatEnterForm" (ngSubmit)="onSubmit($event)" class="form">
       <input formControlName="chatName" placeholder="Chat name" />
       <div class="error">{{getErrorByKey("chatName")}}</div>
+      <button type="submit">Join chat</button>
       <input formControlName="friendEmail" placeholder="Friend's email"/>
       <div class="error">{{getErrorByKey("friendEmail")}}</div>
-      <button type="submit">Join chat</button>
+      <button type="submit">Write a friend</button>
     </form>
   </div>
 </div>
