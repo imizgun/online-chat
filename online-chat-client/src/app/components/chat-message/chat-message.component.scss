@@ -1,7 +1,6 @@
 .message {
-  max-width: 50%;
+  width: 100%;
   display: flex;
-  margin: 10px 10px;
   flex-direction: column;
 
   .author {
@@ -9,6 +8,8 @@
   }
 
   .content {
+    margin: 5px 10px 5px 10px;
+    max-width: 50%;
     background-color: #e6e8e8;
     padding: 0 10px;
     overflow-wrap: break-word;

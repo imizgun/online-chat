@@ -4,7 +4,7 @@ using OnlineChat.DatabaseAccess.Abstraction;
 namespace OnlineChat.Application.Abstractions;
 
 public class BaseService<T, TDto, TRepository> : IBaseService<TDto> 
-	where TDto : class
+	where TDto : class, IIdentifiable
 	where TRepository : IBaseRepository<T>
 {
 	protected readonly IMapper _mapper;
@@ -18,6 +18,7 @@ public class BaseService<T, TDto, TRepository> : IBaseService<TDto>
 	
 	public virtual async Task<Guid> CreateAsync(TDto item)
 	{
+		item.Id = Guid.NewGuid();
 		return await _repository.CreateAsync(_mapper.Map<TDto, T>(item));
 	}
 

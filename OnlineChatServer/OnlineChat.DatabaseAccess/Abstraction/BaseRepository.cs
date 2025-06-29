@@ -24,6 +24,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class, IIdentifiab
 	public virtual async Task<bool> DeleteAsync(Guid id)
 	{
 		var res = await _dbSet
+			.AsNoTracking()
 			.Where(x => x.Id == id)
 			.ExecuteDeleteAsync();
 		
@@ -33,11 +34,17 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class, IIdentifiab
 
 	public virtual async Task<T?> GetAsync(Guid id)
 	{
-		return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
+		return await _dbSet
+			.AsNoTracking()
+			.FirstOrDefaultAsync(x => x.Id == id);
 	}
 
 	public virtual async Task<List<T>> GetAllAsync(int skip, int take)
 	{
-		return await _dbSet.Skip(skip * take).Take(take).ToListAsync();
+		return await _dbSet
+			.AsNoTracking()
+			.Skip(skip * take)
+			.Take(take)
+			.ToListAsync();
 	}
 }

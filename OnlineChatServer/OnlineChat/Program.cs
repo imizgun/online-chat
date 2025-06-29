@@ -9,6 +9,7 @@ using OnlineChat.DatabaseAccess;
 using OnlineChat.DatabaseAccess.Abstraction;
 using OnlineChat.DatabaseAccess.Entities;
 using OnlineChat.DatabaseAccess.Repositories;
+using OnlineChat.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,14 +24,16 @@ builder.Services.AddSingleton(new PasswordHasher<object>());
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-builder.Services.AddScoped<IBaseRepository<Chat>, ChatRepository>();
+builder.Services.AddScoped<IChatRepository, ChatRepository>();
 
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IBaseService<ChatDto>, BaseService<Chat, ChatDto, IBaseRepository<Chat>>>();
+builder.Services.AddScoped<IChatService, ChatService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperConf));
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
+
 builder.Services.AddCors(policy =>
 {
 	policy.AddDefaultPolicy(x => 
@@ -42,6 +45,7 @@ builder.Services.AddCors(policy =>
 
 var app = builder.Build();
 
+app.MapHub<ChatHub>("/chat_hubs");
 if (app.Environment.IsDevelopment()) {
 	app.UseSwagger();
 	app.UseSwaggerUI();

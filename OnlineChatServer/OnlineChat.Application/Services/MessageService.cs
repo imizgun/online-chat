@@ -21,4 +21,10 @@ public class MessageService : BaseService<Message, MessageDto, IMessageRepositor
 
 		return await _repository.UpdateMessageAsync(id, newContent);
 	}
+
+	public async Task<List<MessageDto>> GetChatMessages(Guid id)
+	{
+		var res = await _repository.GetChatMessages(id);
+		return _mapper.Map<List<MessageDto>>(res);
+	}
 }

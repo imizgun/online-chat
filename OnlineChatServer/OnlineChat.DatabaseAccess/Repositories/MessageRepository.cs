@@ -20,10 +20,19 @@ public class MessageRepository : BaseRepository<Message>, IMessageRepository
 	public override async Task<List<Message>> GetAllAsync(int skip, int take)
 	{
 		return await _context.Messages
+			.AsNoTracking()
 			.Take(take)
 			.Skip(skip * take)
 			.Include(x => x.Author)
 			.ToListAsync();
+	}
+
+	public override Task<Message?> GetAsync(Guid id)
+	{
+		return _context.Messages.AsNoTracking()
+			.Include(x => x.Author)
+			.Include(x => x.Chat)
+			.FirstOrDefaultAsync(x => x.Id == id);
 	}
 
 	public async Task<bool> UpdateMessageAsync(Guid id, string newContent)
@@ -35,5 +44,15 @@ public class MessageRepository : BaseRepository<Message>, IMessageRepository
 			);
 
 		return res > 0;
+	}
+
+	public async Task<List<Message>> GetChatMessages(Guid chatId)
+	{
+		return await _context.Messages
+			.Include(x => x.Author)
+			.Include(x => x.Chat)
+			.Where(x => x.ChatId == chatId)
+			.OrderBy(x => x.SentAt)
+			.ToListAsync();
 	}
 }

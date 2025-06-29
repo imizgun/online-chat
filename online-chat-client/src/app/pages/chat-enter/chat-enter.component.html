@@ -3,12 +3,15 @@
     <div class="title">
       Join Chat
     </div>
-    <form [formGroup]="chatEnterForm" (ngSubmit)="onSubmit($event)" class="form">
+    <form [formGroup]="publicChatEnterForm" (ngSubmit)="onSubmit($event, publicChatEnterForm, true)" class="form">
       <input formControlName="chatName" placeholder="Chat name" />
-      <div class="error">{{getErrorByKey("chatName")}}</div>
+      <div class="error">{{getErrorByKey("chatName", publicChatEnterForm)}}</div>
       <button type="submit">Join chat</button>
+    </form>
+    <br/>
+    <form [formGroup]="privateChatEnterForm" (ngSubmit)="onSubmit($event, privateChatEnterForm, false)" class="form">
       <input formControlName="friendEmail" placeholder="Friend's email"/>
-      <div class="error">{{getErrorByKey("friendEmail")}}</div>
+      <div class="error">{{getErrorByKey("friendEmail", privateChatEnterForm)}}</div>
       <button type="submit">Write a friend</button>
     </form>
   </div>

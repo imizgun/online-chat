@@ -22,7 +22,6 @@ public class UserService : BaseService<User, UserDto, IUserRepository>, IUserSer
 		var user = await _repository.GetByEmail(item.Email);
 		if (user != null) return Guid.Empty;
 		
-		item.Id = Guid.NewGuid();
 		item.Password = _passwordHasher.HashPassword(null, item.Password);
 		return await base.CreateAsync(item);
 	}
@@ -36,5 +35,12 @@ public class UserService : BaseService<User, UserDto, IUserRepository>, IUserSer
 		       != PasswordVerificationResult.Success ? 
 		null :
 		_mapper.Map<User, UserDto>(user);
+	}
+
+	public async Task<UserDto?> GetByEmail(string email)
+	{
+		var res = await _repository.GetByEmail(email);
+
+		return res != null ? _mapper.Map<User, UserDto>(res) : null;
 	}
 }

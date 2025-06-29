@@ -5,14 +5,16 @@
     </div>
     <div class="chat-content">
       @for (message of messages; track message.id) {
-        <app-chat-message
+        <app-chat-message class="message" [ngClass]="{'left': message.author.id !== sessionStorage.getItem('id')}"
           [content]="message.content"
-          [author]="message.authorName"
+          [author]="message.author.name"
+          [isLeft]="message.author.id !== sessionStorage.getItem('id')"
         />
       }
+      <br #scrollAnchor/>
     </div>
-    <form class="send-message">
-      <input placeholder="Write your message"/>
+    <form (ngSubmit)="sendMessage()" class="send-message">
+      <input [(ngModel)]="messageText" name="message" placeholder="Write your message"/>
       <button type="submit">Send</button>
     </form>
   </div>

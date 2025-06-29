@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {IMessage} from './IMessage';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +10,25 @@ export class ChatMessagesService {
   private messagesArr: IMessage[] = [
     {
       id: "1",
-      authorId: "1",
-      authorName: "Alex",
-      chatId: "1",
-      chatName: "Chat",
-      content: "HelloHelloHelloHelloHelloHelloHelloHelloHello",
+      author: {
+        id: "1",
+        name: "Alex",
+        email: "a@a.com"
+      },
+      chat: {
+        chatId: "1",
+        chatName: "Chat",
+        isChatPrivate: false
+      },
+      content: "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello",
       sentAt: "28.06.2025"
     }
   ];
 
-  messageSub$ = new BehaviorSubject<IMessage[]>(this.messagesArr);
-
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  getMessages(): Observable<IMessage[]> {
-    return this.messageSub$.asObservable()
+  getMessages(chatId: string): Observable<IMessage[]> {
+    return this.http.get<IMessage[]>(`http://localhost:5013/api/chats/${chatId}/messages`)
   }
 }

@@ -53,7 +53,11 @@ export class LogInComponent  {
 
       }).subscribe({
         next: r => {
-          sessionStorage.setItem('user', JSON.stringify(r));
+
+          sessionStorage.setItem('id', r.id);
+          sessionStorage.setItem('email', r.email);
+          sessionStorage.setItem('name', r.name);
+
           this.navigator.navigateByUrl("/chat_enter");
         },
         error: e => {
