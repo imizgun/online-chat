@@ -1,11 +1,10 @@
-import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ChatMessagesService} from '../../services/chat-message/chat-messages.service';
 import {IMessage} from '../../services/chat-message/IMessage';
 import {ChatMessageComponent} from '../../components/chat-message/chat-message.component';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {ChatConnectionService} from '../../services/chat-connection-service/chat-connection.service';
 import {FormsModule} from '@angular/forms';
-import {filter, map} from 'rxjs';
 import {NgClass} from '@angular/common';
 
 @Component({

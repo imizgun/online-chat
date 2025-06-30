@@ -45,17 +45,17 @@ public class ChatHub : Hub<IChatClient>
 		var mess = await _messageService.GetAsync(id);
 		var messResponse = new MessageResponse {
 			Content = mess!.Content,
-			SentAt = mess!.SentAt,
-			Id = mess!.Id,
+			SentAt = mess.SentAt,
+			Id = mess.Id,
 			Author = new UserResponse {
-				Id = mess!.Author.Id,
-				Name = mess!.Author.Name,
-				Email = mess!.Author.Email
+				Id = mess.Author.Id,
+				Name = mess.Author.Name,
+				Email = mess.Author.Email
 			},
 			Chat = new ChatResponse {
-				ChatId = mess!.Chat.Id,
-				ChatName = mess!.Chat.Name,
-				IsChatPrivate = mess!.Chat.IsPrivate,
+				ChatId = mess.Chat.Id,
+				ChatName = mess.Chat.Name,
+				IsChatPrivate = mess.Chat.IsPrivate,
 			}
 		};
 		await Clients
@@ -81,17 +81,17 @@ public class ChatHub : Hub<IChatClient>
 
 		var messResponse = new MessageResponse {
 			Content = mess!.Content,
-			SentAt = mess!.SentAt,
-			Id = mess!.Id,
+			SentAt = mess.SentAt,
+			Id = mess.Id,
 			Author = new UserResponse {
-				Id = mess!.Author.Id,
-				Name = mess!.Author.Name,
-				Email = mess!.Author.Email
+				Id = mess.Author.Id,
+				Name = mess.Author.Name,
+				Email = mess.Author.Email
 			},
 			Chat = new ChatResponse {
-				ChatId = mess!.Chat.Id,
-				ChatName = mess!.Chat.Name,
-				IsChatPrivate = mess!.Chat.IsPrivate,
+				ChatId = mess.Chat.Id,
+				ChatName = mess.Chat.Name,
+				IsChatPrivate = mess.Chat.IsPrivate,
 			}
 		};
 		

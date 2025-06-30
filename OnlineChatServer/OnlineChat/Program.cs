@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using OnlineChat;
 using OnlineChat.Application.Abstractions;
-using OnlineChat.Application.DTOs;
 using OnlineChat.Application.Services;
 using OnlineChat.DatabaseAccess;
 using OnlineChat.DatabaseAccess.Abstraction;
-using OnlineChat.DatabaseAccess.Entities;
 using OnlineChat.DatabaseAccess.Repositories;
 using OnlineChat.Hubs;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +19,7 @@ builder.Services.AddDbContext<ChatDbContext>(options =>
 });
 
 builder.Services.AddSingleton(new PasswordHasher<object>());
+builder.Services.AddSingleton<IConnectionMultiplexer>(_ => ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis")!));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
