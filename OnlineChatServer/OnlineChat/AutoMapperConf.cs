@@ -21,7 +21,7 @@ public class AutoMapperConf : Profile
 		
 		CreateMap<Chat, ChatDto>()
 			.PreserveReferences()
-			.MaxDepth(1)
+			.MaxDepth(3)
 			.ReverseMap();
 
 		CreateMap<UserDto, UserResponse>()

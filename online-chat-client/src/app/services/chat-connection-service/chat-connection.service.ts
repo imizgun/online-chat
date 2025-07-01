@@ -21,16 +21,29 @@ export class ChatConnectionService {
   constructor(private http: HttpClient, private router: Router, private chatMessages: ChatMessagesService) {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5013/chat_hubs")
+      .withAutomaticReconnect([0, 1000, 2000, 5000])
       .build();
 
     this.hubConnection
       .start()
-      .then(() => console.log('Connected to SignalR'))
+      .then(() => console.log('[Signalr]: Connected to SignalR'))
       .catch((err: Error) => console.log(err));
 
     this.hubConnection.on("ReceiveMessage", (msg: IMessage) => {
       this.messagesSubject.next(msg)
     })
+
+    this.hubConnection.onreconnecting((error) => {
+      console.log("[Signalr]: Reconnecting...", error);
+    });
+
+    this.hubConnection.onreconnected((connectionId) => {
+      console.log("[Signalr]: Reconnected! Connection ID:", connectionId);
+    });
+
+    this.hubConnection.onclose((error) => {
+      console.log("[Signalr]: Connection closed", error);
+    });
   }
 
   joinPublicChat(chatName: string, userId: string) {

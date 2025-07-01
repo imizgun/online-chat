@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineChat;
@@ -20,6 +21,8 @@ builder.Services.AddDbContext<ChatDbContext>(options =>
 
 builder.Services.AddSingleton(new PasswordHasher<object>());
 builder.Services.AddSingleton<IConnectionMultiplexer>(_ => ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis")!));
+builder.Services.AddHangfire(config => config.UseSqlServerStorage(builder.Configuration.GetConnectionString("HangfireDb")));
+builder.Services.AddHangfireServer();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
@@ -28,6 +31,9 @@ builder.Services.AddScoped<IChatRepository, ChatRepository>();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IChatService, ChatService>();
+
+builder.Services.AddScoped<INotificationService, EmailNotificationService>();
+builder.Services.AddScoped<INotificationJobService, NotificationJobService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperConf));
 builder.Services.AddControllers();

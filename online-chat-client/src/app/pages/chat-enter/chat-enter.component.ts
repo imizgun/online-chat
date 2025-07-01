@@ -2,6 +2,7 @@ import {Component, NgZone} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {ChatConnectionService} from '../../services/chat-connection-service/chat-connection.service';
+import {setThrowInvalidWriteToSignalError} from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-chat-enter',
@@ -42,11 +43,15 @@ export class ChatEnterComponent {
       console.log(form.value);
       if (isPublic)
         this.chatConnection.joinPublicChat(form.value['chatName'], sessionStorage.getItem('id') ?? "")
-      else
+      else if (form.value['friendEmail'] !== sessionStorage.getItem('email')) {
         this.chatConnection.joinPrivateChat(
           form.value['friendEmail'],
           sessionStorage.getItem("email") ?? "",
           sessionStorage.getItem('id') ?? "")
+      }
+      else {
+        alert("You can't chat yourself")
+      }
     }
   }
 

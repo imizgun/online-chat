@@ -11,8 +11,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Hangfire.Core" Version="1.8.20" />
+      <PackageReference Include="MailKit" Version="4.13.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
       <PackageReference Include="StackExchange.Redis" Version="2.8.41" />
+      <PackageReference Include="System.Net.Mail" Version="1.0.0-rtm-00002" />
     </ItemGroup>
 
 </Project>

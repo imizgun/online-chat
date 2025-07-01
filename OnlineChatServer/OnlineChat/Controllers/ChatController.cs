@@ -15,20 +15,17 @@ public class ChatController : ControllerBase
 	private IUserService _userService;
 	private IMessageService _messageService;
 	private IMapper _mapper;
-	private IDistributedCache _redis;
 	
 	public ChatController(
 		IChatService chatService,
 		IUserService userService, 
 		IMessageService messageService, 
-		IMapper mapper,
-		IDistributedCache redis)
+		IMapper mapper)
 	{
 		_chatService = chatService;
 		_userService = userService;
 		_messageService = messageService;
 		_mapper = mapper;
-		_redis = redis;
 	}
 
 	[HttpGet("join_public_chat")]

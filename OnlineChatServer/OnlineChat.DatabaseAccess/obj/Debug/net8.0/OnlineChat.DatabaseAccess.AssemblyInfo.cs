@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OnlineChat.DatabaseAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cfa461f6a5d2d77178ddcd9dd6e9a8ff5e85bda0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7267925ff12c14e77355c49126f9f7314a3e2f4")]
 [assembly: System.Reflection.AssemblyProductAttribute("OnlineChat.DatabaseAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OnlineChat.DatabaseAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
