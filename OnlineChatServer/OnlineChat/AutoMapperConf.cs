@@ -30,10 +30,15 @@ public class AutoMapperConf : Profile
 
 		CreateMap<ChatDto, ChatResponse>()
 			.PreserveReferences()
+			.ConstructUsing(x => new ChatResponse {
+				ChatId = x.Id,
+				ChatName = x.Name,
+				IsChatPrivate = x.IsPrivate
+			})
 			.MaxDepth(1);
 
 		CreateMap<MessageDto, MessageResponse>()
 			.PreserveReferences()
-			.MaxDepth(1);
+			.MaxDepth(3);
 	}
 }

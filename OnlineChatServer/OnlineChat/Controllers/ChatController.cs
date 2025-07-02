@@ -77,7 +77,10 @@ public class ChatController : ControllerBase
 	{
 		var chat = await _chatService.GetAsync(id);
 		if (chat == null) return NotFound();
+
+		var res = await _messageService.GetChatMessages(id);
+		var mapped = _mapper.Map<List<MessageResponse>>(res);
 		
-		return Ok(_mapper.Map<List<MessageResponse>>(await _messageService.GetChatMessages(id)));
+		return Ok(mapped);
 	}
 }

@@ -2,17 +2,19 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ChatMessagesService} from '../../services/chat-message/chat-messages.service';
 import {IMessage} from '../../services/chat-message/IMessage';
 import {ChatMessageComponent} from '../../components/chat-message/chat-message.component';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ChatConnectionService} from '../../services/chat-connection-service/chat-connection.service';
 import {FormsModule} from '@angular/forms';
 import {NgClass} from '@angular/common';
+import {TimeFormatPipe} from './TimeFormatPipe';
 
 @Component({
   selector: 'app-chat',
   imports: [
     ChatMessageComponent,
     FormsModule,
-    NgClass
+    NgClass,
+    TimeFormatPipe
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
@@ -30,15 +32,31 @@ export class ChatComponent implements OnInit {
 
   constructor(private chatMessageService: ChatMessagesService,
               private router: ActivatedRoute,
+              private route: Router,
               private chatConnection: ChatConnectionService) {}
 
   ngOnInit(): void {
-    this.chatId = this.router.snapshot.paramMap.get('id')!;
+    if (sessionStorage.getItem('id') === undefined) {
+      sessionStorage.clear();
+      this.route.navigate(['/log_in']);
+      return;
+    }
 
-    this.chatMessageService.getMessages(this.chatId).subscribe(history => {
-      this.messages = history;
+    this.chatId = this.router.snapshot.paramMap.get('id')!;
+    const userId = sessionStorage.getItem('id');
+
+    console.log(`[chat]: ${userId}, ${this.chatId}`);
+    if (this.chatId && userId) {
+      this.chatConnection.rejoinChat(this.chatId, userId).then(() => console.log('[chat]: Reconnected successfully'));
+    }
+
+    this.chatMessageService.getMessages(this.chatId).subscribe();
+
+    this.chatMessageService.messagesObs$.subscribe(history => {
+      this.messages = [...history];
       this.chatName  = history[0]?.chat.chatName ?? 'Chat';
-    });
+      setTimeout(() => this.scrollToBottom(), 0)
+    })
 
     this.chatConnection.messages$
       .subscribe(m => {

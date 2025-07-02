@@ -1,21 +1,27 @@
-import {Component, NgZone} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ChatConnectionService} from '../../services/chat-connection-service/chat-connection.service';
-import {setThrowInvalidWriteToSignalError} from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-chat-enter',
   imports: [
     FormsModule,
-    ReactiveFormsModule,
-    RouterLink
+    ReactiveFormsModule
   ],
   templateUrl: './chat-enter.component.html',
   styleUrl: './chat-enter.component.scss'
 })
-export class ChatEnterComponent {
-  constructor(private chatConnection: ChatConnectionService) {}
+export class ChatEnterComponent implements OnInit {
+  constructor(private router: Router, private activeRouter: ActivatedRoute, private chatConnection: ChatConnectionService) {}
+
+  ngOnInit(): void {
+    if (sessionStorage.getItem('id') === null) {
+      sessionStorage.clear();
+      this.router.navigate(['/log_in']);
+      return;
+    }
+  }
 
   publicChatEnterForm: FormGroup = new FormGroup({
       chatName: new FormControl('', [Validators.required])

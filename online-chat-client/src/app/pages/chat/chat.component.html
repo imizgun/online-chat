@@ -8,7 +8,10 @@
         <app-chat-message class="message" [ngClass]="{'left': message.author.id !== sessionStorage.getItem('id')}"
           [content]="message.content"
           [author]="message.author.name"
+          [id]="message.id"
           [isLeft]="message.author.id !== sessionStorage.getItem('id')"
+          [sentAt]="message.sentAt | timeFormatPipe"
+          [chatId]="message.chat.chatId"
         />
       }
       <br #scrollAnchor/>

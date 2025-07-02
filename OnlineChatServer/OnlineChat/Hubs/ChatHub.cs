@@ -10,6 +10,8 @@ namespace OnlineChat.Hubs;
 public interface IChatClient
 {
 	public Task ReceiveMessage(MessageResponse message);
+	public Task MessageDeleted(Guid messageId);
+	public Task MessageEdited(Guid messageId, string newContent);
 }
 
 public class ChatHub : Hub<IChatClient>
@@ -46,38 +48,55 @@ public class ChatHub : Hub<IChatClient>
 
 		await _notificationJobService.CancelNotificationJob(connection.UserId, connection.ChatRoomId);
 
-		var message = $"{user.Name} joined the chat";
+		// var message = $"{user.Name} joined the chat";
+		//
+		// var messageDto = new MessageDto {
+		// 	Content = message,
+		// 	SentAt = DateTime.UtcNow,
+		// 	Author = new UserDto { Id = connection.UserId },
+		// 	Chat = new ChatDto { Id = chatRoom.Id }
+		// };
+		//
+		// var id = await _messageService.CreateAsync(messageDto);
+		// var mess = await _messageService.GetAsync(id);
+		// var messResponse = new MessageResponse {
+		// 	Content = mess!.Content,
+		// 	SentAt = mess.SentAt,
+		// 	Id = mess.Id,
+		// 	Author = new UserResponse {
+		// 		Id = mess.Author.Id,
+		// 		Name = mess.Author.Name,
+		// 		Email = mess.Author.Email
+		// 	},
+		// 	Chat = new ChatResponse {
+		// 		ChatId = mess.Chat.Id,
+		// 		ChatName = mess.Chat.Name,
+		// 		IsChatPrivate = mess.Chat.IsPrivate,
+		// 	}
+		// };
+		//
+		// await Clients
+		// 	.Group(connection.ChatRoomId.ToString())
+		// 	.ReceiveMessage(messResponse);
+		//
+		// await ScheduleNotification(connection.UserId, connection.ChatRoomId);
+	}
 
-		var messageDto = new MessageDto {
-			Content = message,
-			SentAt = DateTime.UtcNow,
-			Author = new UserDto { Id = connection.UserId },
-			Chat = new ChatDto { Id = chatRoom.Id }
-		};
-		
-		var id = await _messageService.CreateAsync(messageDto);
-		var mess = await _messageService.GetAsync(id);
-		var messResponse = new MessageResponse {
-			Content = mess!.Content,
-			SentAt = mess.SentAt,
-			Id = mess.Id,
-			Author = new UserResponse {
-				Id = mess.Author.Id,
-				Name = mess.Author.Name,
-				Email = mess.Author.Email
-			},
-			Chat = new ChatResponse {
-				ChatId = mess.Chat.Id,
-				ChatName = mess.Chat.Name,
-				IsChatPrivate = mess.Chat.IsPrivate,
-			}
-		};
-		
-		await Clients
-			.Group(connection.ChatRoomId.ToString())
-			.ReceiveMessage(messResponse);
-		
-		await ScheduleNotification(connection.UserId, connection.ChatRoomId);
+	public async Task DeleteMessage(UserConnection connection, Guid messageId) {
+		var message = await _messageService.GetAsync(messageId);
+		if (message is not null && message.Author.Id == connection.UserId && message.Chat.Id == connection.ChatRoomId) {
+			await _messageService.DeleteAsync(messageId);
+			await Clients.Group(connection.ChatRoomId.ToString()).MessageDeleted(messageId);
+		} 
+	}
+
+	public async Task EditMessage(UserConnection connection, Guid messageId, string newContent) {
+		var message = await _messageService.GetAsync(messageId);
+		if (message is not null && message.Author.Id == connection.UserId && message.Chat.Id == connection.ChatRoomId) {
+			var res = await _messageService.UpdateAsync(messageId, connection.UserId, newContent);
+			if (res)
+				await Clients.Group(connection.ChatRoomId.ToString()).MessageEdited(messageId, newContent);
+		}
 	}
 
 	public override async Task OnDisconnectedAsync(Exception? exception) {

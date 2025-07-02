@@ -1,8 +1,33 @@
-<div class="message" [ngStyle]="{'align-items': isLeft ? 'flex-start' : 'flex-end'}">
-  <div class="author">
-    {{author}}
+<div class="message" [ngStyle]="{'justify-content': isLeft ? 'flex-start' : 'flex-end'}">
+  <div class="edit-block" [ngClass]="{'active': !isLeft}">
+    <div (click)="setPopUp()">
+      ...
+    </div>
+    <app-edit-pop-up
+      [messageId]="id"
+      [isActive]="isActivePopUp"
+      (onEditing)="setEditContent($event)"
+    />
   </div>
-  <div class="content" [ngStyle]="{'border-radius': isLeft ? '10px 10px 10px 0' : '10px 10px 0 10px'}">
-    {{content}}
+  <div class="content-wrap" [ngStyle]="{'align-items': isLeft ? 'flex-start' : 'flex-end'}">
+    <div class="author">
+      {{author}}
+    </div>
+    <div class="content" [ngStyle]="{'border-radius': isLeft ? '10px 10px 10px 0' : '10px 10px 0 10px'}">
+      <div #editableDiv class="messageText" [attr.contentEditable]="isEditing">
+        {{content}}
+      </div>
+      <div class="bottom">
+        <div class="sentAt">
+          {{sentAt}}
+        </div>
+        <div class="confirm" [ngClass]="{'active': isEditing}" (click)="setEditContent(false)">
+          ×
+        </div>
+        <div class="confirm" [ngClass]="{'active': isEditing}" (click)="saveEdit()">
+          ✔
+        </div>
+      </div>
+    </div>
   </div>
 </div>

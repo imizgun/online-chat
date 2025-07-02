@@ -10,7 +10,7 @@ public class NotificationJobService : INotificationJobService {
 	private readonly IDatabase _redis;
 	private readonly INotificationService _notificationService;
 	private readonly ILogger<NotificationJobService> _logger;
-	private readonly int MinuteDelay = 1;
+	private readonly int _minutesDelay = 5;
 
 	public NotificationJobService(
 		IBackgroundJobClient backgroundJobClient, 
@@ -34,7 +34,7 @@ public class NotificationJobService : INotificationJobService {
 		var jobId = _backgroundJobClient
 			.Schedule(
 				() => _notificationService.NotifyUser(userId, chatId,  "Dear user, you have unread messages"),
-				TimeSpan.FromMinutes(MinuteDelay)
+				TimeSpan.FromMinutes(_minutesDelay)
 				);
 		
 		await _redis.StringSetAsync(jobString, jobId, TimeSpan.FromMinutes(5));

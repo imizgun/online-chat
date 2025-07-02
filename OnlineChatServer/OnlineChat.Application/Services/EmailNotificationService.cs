@@ -1,5 +1,4 @@
-﻿using System.Net;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using OnlineChat.Application.Abstractions;
 using MailKit.Security;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr'
 import {IMessage} from '../chat-message/IMessage';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {IUserConnection} from './IUserConnection';
 import {HttpClient} from '@angular/common/http';
 import {IPublicChat} from './IPublicChat';
@@ -30,8 +30,16 @@ export class ChatConnectionService {
       .catch((err: Error) => console.log(err));
 
     this.hubConnection.on("ReceiveMessage", (msg: IMessage) => {
-      this.messagesSubject.next(msg)
+      this.chatMessages.addMessage(msg)
     })
+
+    this.hubConnection.on("MessageDeleted", (messageId) => {
+      this.chatMessages.deleteMessage(messageId);
+    })
+
+    this.hubConnection.on("MessageEdited", (messageId: string, newContent)=> {
+      this.chatMessages.editMessage(messageId, newContent);
+    });
 
     this.hubConnection.onreconnecting((error) => {
       console.log("[Signalr]: Reconnecting...", error);
@@ -74,4 +82,45 @@ export class ChatConnectionService {
 
     this.hubConnection.invoke("SendMessage", userConnection, message);
   }
+
+  deleteMessage(userConnection: IUserConnection, messageId: string) {
+    if (this.hubConnection.state !== signalR.HubConnectionState.Connected) return;
+
+    this.hubConnection.invoke("DeleteMessage", userConnection, messageId);
+  }
+
+  editMessage(userConnection: IUserConnection, messageId: string, newContent: string) {
+    if (this.hubConnection.state !== signalR.HubConnectionState.Connected) return;
+
+    this.hubConnection.invoke("EditMessage", userConnection, messageId, newContent);
+  }
+
+  async rejoinChat(chatRoomId: string, userId: string) {
+    console.log("[Rejoin]: Trying to rejoin", chatRoomId, userId);
+
+    if (this.hubConnection.state !== signalR.HubConnectionState.Connected) {
+      const connected = await this.waitUntilConnected(5000);
+      if (!connected) {
+        console.warn("[Rejoin]: Timed out waiting for connection");
+        return;
+      }
+    }
+
+    try {
+      await this.hubConnection.invoke("JoinChat", { userId, chatRoomId });
+      console.log("[Rejoin]: Successfully rejoined", chatRoomId);
+    } catch (err) {
+      console.error("[Rejoin]: Failed to invoke JoinChat", err);
+    }
+  }
+
+  private async waitUntilConnected(timeoutMs = 5000): Promise<boolean> {
+    const start = Date.now();
+    while (this.hubConnection.state !== signalR.HubConnectionState.Connected) {
+      if (Date.now() - start > timeoutMs) return false;
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    return true;
+  }
+
 }
