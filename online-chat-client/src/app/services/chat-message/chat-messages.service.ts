@@ -16,7 +16,6 @@ export class ChatMessagesService {
     return this.http.get<IMessage[]>(`http://localhost:5013/api/chats/${chatId}/messages`)
       .pipe(
         tap(msgs => {
-          console.log(msgs);
           this.messages = msgs;
           this.messagesObs$.next(this.messages);
         })

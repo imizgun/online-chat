@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./online-chat-client
+      dockerfile: Dockerfile
+    container_name: angular-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./OnlineChatServer
+      dockerfile: Dockerfile
+    container_name: aspnet-backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__ChatDbContext=Server=mssql-db;Database=onlinechat;User=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
+      - ConnectionStrings__Redis=redis:6379
+      - ConnectionStrings__HangfireDb=Server=mssql-db;Database=onlinechat;User=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
+    ports:
+      - "5013:8080"
+    depends_on:
+      - mssql-db
+      - redis
+    networks:
+      - app-network
+
+  mssql-db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql-db
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sql_data:/var/opt/mssql
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+volumes:
+  sql_data:
+
+networks:
+  app-network:
+    driver: bridge

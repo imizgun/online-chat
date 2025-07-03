@@ -123,4 +123,8 @@ export class ChatConnectionService {
     return true;
   }
 
+  closeConnection() {
+    this.hubConnection.stop();
+  }
+
 }

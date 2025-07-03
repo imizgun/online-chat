@@ -1,26 +1,20 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using OnlineChat.Application.Abstractions;
 using OnlineChat.Application.DTOs;
+using OnlineChat.Hubs.Abstraction;
 using OnlineChat.Models;
 using OnlineChat.Responses;
 using StackExchange.Redis;
 
 namespace OnlineChat.Hubs;
 
-public interface IChatClient
-{
-	public Task ReceiveMessage(MessageResponse message);
-	public Task MessageDeleted(Guid messageId);
-	public Task MessageEdited(Guid messageId, string newContent);
-}
-
 public class ChatHub : Hub<IChatClient>
 {
 	private readonly IUserService _userService;
 	private readonly IChatService _chatService;
 	private readonly IMessageService _messageService;
-	private IDatabase _redis;
-	private INotificationJobService _notificationJobService;
+	private readonly IDatabase _redis;
+	private readonly INotificationJobService _notificationJobService;
 
 	public ChatHub(
 		IUserService userService, 
@@ -47,39 +41,6 @@ public class ChatHub : Hub<IChatClient>
 		await SetUserDataInRedis(user.Id, Context.ConnectionId);
 
 		await _notificationJobService.CancelNotificationJob(connection.UserId, connection.ChatRoomId);
-
-		// var message = $"{user.Name} joined the chat";
-		//
-		// var messageDto = new MessageDto {
-		// 	Content = message,
-		// 	SentAt = DateTime.UtcNow,
-		// 	Author = new UserDto { Id = connection.UserId },
-		// 	Chat = new ChatDto { Id = chatRoom.Id }
-		// };
-		//
-		// var id = await _messageService.CreateAsync(messageDto);
-		// var mess = await _messageService.GetAsync(id);
-		// var messResponse = new MessageResponse {
-		// 	Content = mess!.Content,
-		// 	SentAt = mess.SentAt,
-		// 	Id = mess.Id,
-		// 	Author = new UserResponse {
-		// 		Id = mess.Author.Id,
-		// 		Name = mess.Author.Name,
-		// 		Email = mess.Author.Email
-		// 	},
-		// 	Chat = new ChatResponse {
-		// 		ChatId = mess.Chat.Id,
-		// 		ChatName = mess.Chat.Name,
-		// 		IsChatPrivate = mess.Chat.IsPrivate,
-		// 	}
-		// };
-		//
-		// await Clients
-		// 	.Group(connection.ChatRoomId.ToString())
-		// 	.ReceiveMessage(messResponse);
-		//
-		// await ScheduleNotification(connection.UserId, connection.ChatRoomId);
 	}
 
 	public async Task DeleteMessage(UserConnection connection, Guid messageId) {

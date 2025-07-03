@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ChatMessagesService} from '../../services/chat-message/chat-messages.service';
 import {IMessage} from '../../services/chat-message/IMessage';
 import {ChatMessageComponent} from '../../components/chat-message/chat-message.component';
@@ -19,7 +19,7 @@ import {TimeFormatPipe} from './TimeFormatPipe';
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   chatName: string = "Chat";
   private chatId: string = ""
   messageText: string = "";
@@ -83,6 +83,11 @@ export class ChatComponent implements OnInit {
       this.messageText = "";
     }
   }
+
+  ngOnDestroy(): void {
+    this.chatConnection.closeConnection();
+  }
+
 
   protected readonly sessionStorage = sessionStorage;
 }
