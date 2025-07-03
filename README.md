@@ -1,5 +1,17 @@
 # Онлайн чат на SignalR и Angular
 
+# Стэк
+## Backend
+ - ASP.NET Core
+ - SignalR
+ - EF Core
+ - MS SQL
+ - Redis
+ - HangFire
+
+## Frontend
+ - Angular
+
 # Использование
 
  - `git clone https://github.com/imizgun/online-chat.git`
