@@ -29,18 +29,22 @@ export class EditPopUpComponent {
   }
 
   onDelete() {
-    let user: IUserConnection = {
-      UserId: sessionStorage.getItem('id') ?? "",
-      ChatRoomId: this.router.snapshot.paramMap.get('id') ?? ""
-    }
+    if (this.isActive) {
+      let user: IUserConnection = {
+        UserId: sessionStorage.getItem('id') ?? "",
+        ChatRoomId: this.router.snapshot.paramMap.get('id') ?? ""
+      }
 
-    if (user.UserId !== null && user.ChatRoomId !== null) {
-      this.chatConnection.deleteMessage(user, this.messageId);
+      if (user.UserId !== null && user.ChatRoomId !== null) {
+        this.chatConnection.deleteMessage(user, this.messageId);
+      }
     }
   }
 
   onEdit() {
-    this.editing = true;
-    this.onEditing.emit(this.editing);
+    if (this.isActive) {
+      this.editing = true;
+      this.onEditing.emit(this.editing);
+    }
   }
 }

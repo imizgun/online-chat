@@ -4,9 +4,11 @@
   border-radius: 12px;
   background-color: #f3f3f3;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out; }
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none; }
   .pop-up.active {
-    opacity: 1; }
+    opacity: 1;
+    pointer-events: all; }
   .pop-up .tools {
     display: flex;
     flex-direction: column; }
